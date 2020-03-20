@@ -1,0 +1,259 @@
+body,html {
+    height: 100%;
+  }
+button>a{
+    color:white;
+    text-decoration:none;
+}
+button>a:hover{
+    color:white;
+    text-decoration:none;
+}
+.padding-left{
+    padding-left:2rem;
+}
+.float-right{
+    padding-left:55%;
+}
+.header{
+    background-image:url('../img/first-page.jpg');
+    width:100%;
+    height:750px;
+    background-size:cover;
+    background-repeat: no-repeat;
+}
+.header h1, h4{
+    color: white;
+    text-align:center;
+}
+.header h1{
+    font-size:50px;
+}
+.header2{
+    height:500px;
+    position:relative;
+}
+.header2::before{
+    content:"";
+    top:0;
+    left:0;
+    width:100%;
+    height:500px;
+    position:absolute;
+    background-image:url("https://cdn.pixabay.com/photo/2016/11/29/06/15/adult-1867743_1280.jpg");
+    background-size:cover;
+    background-repeat:no-repeat;
+    filter:opacity(40%);
+    background-attachment: fixed;
+}
+.header2-inside{
+    position:relative;
+}
+.header2-inside h1{
+    text-align:center;
+    padding-top:100px;
+}
+#first-div{
+    padding-top:70px;
+}
+.sv{
+    display:block;
+    margin:0 auto;
+    text-align:center;
+    padding-top:40px;
+}
+.header3{
+    height:500px;
+    position:relative;
+}
+.header3::before{
+    content:"";
+    top:0;
+    left:0;
+    width:100%;
+    height:500px;
+    position:absolute;
+    background-image:url("https://cdn.pixabay.com/photo/2014/12/20/09/18/running-573762_1280.jpg");
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-position:right;
+    filter:opacity(80%);
+    background-attachment: fixed;
+}
+.header3-inside{
+    position:relative;
+}
+.header3 h1{
+    text-align:center;
+    padding-top:100px;
+    font-size:50px;
+    color:white;
+    text-shadow: 1px 1px black;
+}
+@media(min-width:800px){
+    #sign-up{
+        margin-left:45rem;
+    }
+    .header2 .sv{
+        padding-top:10px;
+    }
+    
+}
+@media(max-width: 1280px){
+    #sign-up{
+        margin-left:35%;
+    }
+ }
+@media(max-width:500px){
+    #sign-up{
+        margin-left:30%;
+    }
+    .header2 .sv{
+        padding-top:10px;
+    }
+
+}
+#sign-up{
+    padding-left:25px;
+    padding-right:25px;
+}
+#learn-more{
+    padding-left:15px;
+    padding-right:15px;
+}
+#start-now{
+    display:block;
+    margin:auto;
+    margin-top:40rem;
+}
+#start-now:hover{
+    font-size:21px;
+    background-color:hsla(220, 15%, 30%,0.8);
+    transition:0.3s;
+}
+#sign-up, #learn-more, #start-now{
+    background-color:hsla(220, 15%, 30%,0.7);
+    border-radius:10px;
+    margin-top:10px;
+}
+.container h1{
+    padding-top:100px;
+}
+.align-center{
+    display:block;
+    margin:auto;
+}
+footer{
+    height:100px;
+    background-color:black;
+}
+footer p{
+    text-align:center;
+    color:white;
+    padding-top:35px;
+}
+.form-header{
+    height:500px;
+    position:relative;
+}
+.form-header::before{
+    content:"";
+    top:0;
+    left:0;
+    width:100%;
+    height:500px;
+    position:absolute;
+    background-image:url('../img/contact.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    filter:opacity(30%);
+    
+}
+.form-header-inside{
+    position:relative;
+}
+.form-header-inside h1{
+    padding-top:10rem;
+    text-align:center;
+    text-shadow:0px 2px white;
+}
+.form-header-inside h3{
+    text-align:center;
+    text-shadow:0px 2px white;
+}
+.form-row{padding-top:10px}
+.form-group{padding-top:10px;}
+.btn-secondary{margin-top:10px;}
+.form{height:400px;padding-top:70px;}
+#sign-up-form{
+    padding-top:100px;
+}
+#sign-up-form h3{
+    color:white;
+    text-shadow:2px 0 gray;
+}
+.sign-up-form{
+    width:300px;
+}
+.option{
+    padding-left:15px;
+    color:white;
+}
+.option a{
+    color:gainsboro;
+}
+.option a:hover{
+    color:white;
+    transition:0.8s;
+}
+.signup{
+    height:650px;
+    position:relative;
+}
+.signup::before{
+    content:"";
+    top:0;
+    left:0;
+    width:100%;
+    height:650px;
+    position:absolute;
+    background-image:url('../img/contact.jpg');
+    background-size:cover;
+    background-repeat:no-repeat;
+    filter:blur(8px);
+    
+    
+}
+.signup-inside{
+    position:relative;
+}
+
+header{
+    height:300px;
+    background-color:rgb(115, 114, 114);
+}
+header>h1{
+    padding-top:10rem;
+    padding-left:100px;
+    color:white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+section{
+    height:100vh;
+    padding-top:100px;
+}
+p>a{
+    color:gray;
+    text-decoration:none;
+}
+p>a:hover{
+    color:black;
+    text-decoration:none;
+}
+#about{
+    width:200px;
+    height:auto;
+    padding-top:12vh;
+    display:block;
+    margin:auto;
+}
