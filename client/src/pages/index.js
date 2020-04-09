@@ -6,4 +6,13 @@ import Contacts from './Contacts'
 import Forum from './Forum'
 import About from './About'
 import Articles from './Articles'
-export {Login,Signup,Products,About,Articles,Forum,Contacts,HomeContent}
+import AdminPanel from './AdminPanel'
+import AdminProducts from './AdminProducts'
+import AdminArticles from './AdminArticles'
+
+
+export {Login,AdminPanel,AdminProducts,
+        AdminArticles,
+        Signup,Products,About,
+        Articles,Forum,
+        Contacts,HomeContent}

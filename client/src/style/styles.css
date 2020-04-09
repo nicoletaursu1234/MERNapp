@@ -1,6 +1,52 @@
 body,html {
     height: 100%;
   }
+.navbar {
+    background-color: 'hsla(220, 15%, 30%, 0.5)';
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left:100px;
+}
+.navbar a{
+    text-decoration: none
+}
+.forumItem{
+    border: 0.5px solid gray;
+    padding:40px;
+    margin-bottom:20px;
+}
+.forumItem button{
+    margin-bottom: 20px;
+}
+.items{
+    padding-left:130px;
+
+}
+.items-ul button{
+    margin-left:20px;
+}
+.items-ul{
+    list-style-type: none;
+}
+.admin-panel a{
+    font-size:25px;
+    color:gray;
+    padding-left:50px;
+}
+.admin-panel a:hover{
+    color:black
+}
+.adminForm{
+    padding-left:100px;
+}
+.adminForm textarea{
+    width:500px;
+}
+.adminForm>input{
+    padding-left:10px;
+    width:300px;
+}
+
 button>a{
     color:white;
     text-decoration:none;
@@ -18,7 +64,7 @@ button>a:hover{
 .header{
     background-image:url('../img/first-page.jpg');
     width:100%;
-    height:750px;
+    height:850px;
     background-size:cover;
     background-repeat: no-repeat;
 }
@@ -92,7 +138,7 @@ button>a:hover{
 }
 @media(min-width:800px){
     #sign-up{
-        margin-left:45rem;
+        margin-left:40rem;
     }
     .header2 .sv{
         padding-top:10px;
@@ -239,8 +285,7 @@ header>h1{
     font-family: Arial, Helvetica, sans-serif;
 }
 section{
-    height:100vh;
-    padding-top:100px;
+    min-height:100vh;
 }
 p>a{
     color:gray;

@@ -2,21 +2,21 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Navbar, Footer } from '../components'
 import { AuthContext } from '../Context/AuthContext'
 import axios from 'axios'
-import ForumItems from '../components/ForumItems'
+import ProductItems from '../components/ProductItems'
 import Message from "../components/Message"
 
-const Forum = props => {
-    const [post, setPost] = useState({ title: "", text: "", comments: [], _creator: "" })
-    const [posts, setPosts] = useState([])
+const AdminProducts = props => {
+    const [product, setProduct] = useState({ name: "", description: "", image: null, price: "" })
+    const [products, setProducts] = useState([])
     const [message, setMessage]=useState(null)
-    const authContext=useContext(AuthContext)
+    const authContext =useContext(AuthContext)
 
     useEffect(()=>{
-        axios.get('/forum')
+        axios.get('/products')
         .then(res=>{
             if(res.status!==401){
                 console.log(res.data)
-                setPosts(res.data)
+                setProducts(res.data)
             }
             else{
                 return{message:{msgBody: "UnAuthorized", msgError : true}}
@@ -26,12 +26,12 @@ const Forum = props => {
 
     const onSubmit=e=>{
         e.preventDefault()
-        axios.post('/forum',post)
+        axios.post('/admin/products',product)
         .then(res =>{
             const {message}=res.data
             resetForm()
             if(!message.msgError){
-                    setPosts(res.data)
+                    setProduct(res.data)
                     setMessage(message)
                 }
             
@@ -46,44 +46,50 @@ const Forum = props => {
         })
     }
     const onChange = e =>{
-        setPost({...post, [e.target.name] : e.target.value})
-        console.log(post)
+        setProduct({...product, [e.target.name] : e.target.value})
+        console.log(product)
       }
     const resetForm=()=>{
-        setPost({title:"", text: ""})
+        setProduct({name:"", description:"", image:null, price: ""})
     }
 
     return (
         <div>
             <Navbar/>
                 <header className="lessons">
-                    <h1>Forum</h1>
+                    <h1>Produse</h1>
                 </header>
-                <section id="lessons" className="container">
-            <form className="forumItem" onSubmit={onSubmit}>
-                <h3>Adauga o postare</h3>
+                <section id="lessons">
+            <form className="adminForm" onSubmit={onSubmit}>
                 <input 
                     className="form-control"
                     type="text" 
                     onChange={onChange}
-                    value={post.title} 
-                    name="title" 
-                    placeholder="Tema postarii" />
-                <br/>
-                <textarea rows="4"
+                    value={product.name} 
+                    name="name" 
+                    placeholder="Denumirea produsului" />
+                <input 
                     className="form-control"
                     type="text" 
                     onChange={onChange}
-                    value={post.text} 
-                    name="text" 
-                    placeholder="Text" />
+                    value={product.description} 
+                    name="description" 
+                    placeholder="Descriere" />
+                <input 
+                    className="form-control"
+                    type="number" 
+                    onChange={onChange}
+                    value={product.price} 
+                    name="price" 
+                    placeholder="Pretul" />
+               
                 <button  className="btn btn-primary" type="submit">Adauga</button>
             </form>
             {message ? <Message message={message} /> : null}
-            <ul>
+            <ul className="items-ul items" style={{paddingTop:"40px"}}>
             {
-                posts.data && posts.data.map(post =>{
-                return <ForumItems id={post._id} creator={post._creator} post={post} data={posts.data} comments={post._comments} key={post._id}/>
+                products.data && products.data.map(product =>{
+                return <ProductItems product={product} id={product._id} key={product._id}/>
                 }
             )}
             </ul>
@@ -92,4 +98,4 @@ const Forum = props => {
         </div>
     )
 }
-export default Forum
+export default AdminProducts

@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app/App';
-
-ReactDOM.render(<App />, document.getElementById('root'));
+import AuthProvider from './Context/AuthContext'
+ReactDOM.render(<AuthProvider><App /></AuthProvider>, document.getElementById('root'));

@@ -1,64 +1,86 @@
-import React, { Component } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+import { AuthContext } from '../Context/AuthContext'
+import AuthService from '../Services/AuthService'
 
-const Collapse = styled.div.attrs({
-    className: 'collpase navbar-collapse',
-    id: "navbarResponsive"
-})``
 
-const List = styled.div.attrs({
-    className: 'navbar-nav ml-auto',
-})``
+const Links = props => {
+    const { isAuthenticated, user, setIsAuthenticated, setUser } = useContext(AuthContext)
 
-const Item = styled.div.attrs({
-    className: 'collpase navbar-collapse',
-})``
-
-class Links extends Component {
-    render() {
+    const onClickLogoutHandler = () => {
+        AuthService.logout().then(data => {
+            if (data.success) {
+                setUser(data.user)
+                setIsAuthenticated(false)
+            }
+        })
+    }
+    const unauthenticatedNavbar = () => {
         return (
-            <React.Fragment>
-                <Link to="/" className="navbar-brand">
-                    FitPass
+            <>
+                <Link to="/">
+                    <li className="nav-item nav-link">Pagina principala</li>
                 </Link>
-                <Collapse>
-                    <List>
-                        <Item>
-                            <Link to="/" className="nav-link">
-                                Pagina principala
-                            </Link>
-                        </Item>
-                        <Item>
-                            <Link to="/products" className="nav-link">
-                                Produse
-                            </Link>
-                        </Item>
-                        <Item>
-                            <Link to="/articles" className="nav-link">
-                                Articole
-                            </Link>
-                        </Item>
-                        <Item>
-                            <Link to="/forum" className="nav-link">
-                                Forum
-                            </Link>
-                        </Item>
-                        <Item>
-                            <Link to="/contacts" className="nav-link">
-                                Contacte
-                            </Link>
-                        </Item>
-                        <Item>
-                            <Link to="/login" className="nav-link">
-                                Log in
-                            </Link>
-                        </Item>
-                    </List>
-                </Collapse>
-            </React.Fragment>
+                <Link to="/products">
+                    <li className="nav-item nav-link">Produse</li>
+                </Link>
+                <Link to="/articles">
+                    <li className="nav-item nav-link">Articole</li>
+                </Link>
+                <Link to="/login">
+                    <li className="nav-item nav-link">Forum</li>
+                </Link>
+                <Link to="/contacts">
+                    <li className="nav-item nav-link">Contacte</li>
+                </Link>
+                <Link to="/login">
+                    <li className="nav-item nav-link">Login</li>
+                </Link>
+            </>
         )
     }
+    const authenticatedNavbar = () => {
+        return (
+            <>
+
+                {
+                    user.role === "admin"
+                        ?
+                        <Link to="/admin/panel">
+                            <li className="nav-item nav-link">Admin Panel</li>
+                        </Link>
+                        :<>
+                        <Link to="/products">
+                            <li className="nav-item nav-link">Produse</li>
+                        </Link>
+                        <Link to="/articles">
+                            <li className="nav-item nav-link">Articole</li>
+                        </Link>
+                        <Link to="/forum">
+                            <li className="nav-item nav-link">Forum</li>
+                        </Link>
+                        <Link to="/contacts">
+                            <li className="nav-item nav-link">Contacte</li>
+                        </Link>
+                        <Link to="/forum">
+                            <li className="nav-item nav-link">{user.username}</li>
+                        </Link>
+                        </>
+                }
+                <Link to="#">
+                    <li className="nav-item nav-link" onClick={onClickLogoutHandler}>Signout</li>
+                </Link>
+            </>
+        )
+    }
+    return (
+        <div className="collapse navbar-collapse" id="navbarNav">
+            <ul className="navbar-nav">
+                {!isAuthenticated ? unauthenticatedNavbar() : authenticatedNavbar()}
+            </ul>
+        </div>
+
+    )
 }
 
 export default Links

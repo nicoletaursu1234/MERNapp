@@ -2,21 +2,21 @@ import React, { useState, useContext, useEffect } from 'react'
 import { Navbar, Footer } from '../components'
 import { AuthContext } from '../Context/AuthContext'
 import axios from 'axios'
-import ForumItems from '../components/ForumItems'
+import ArticleItems from '../components/ArticleItems'
 import Message from "../components/Message"
-
-const Forum = props => {
-    const [post, setPost] = useState({ title: "", text: "", comments: [], _creator: "" })
-    const [posts, setPosts] = useState([])
+import '../style/styles.css'
+const AdminArticles = props => {
+    const [article, setArticle] = useState({ title: "", content: "" })
+    const [articles, setArticles] = useState([])
     const [message, setMessage]=useState(null)
-    const authContext=useContext(AuthContext)
+    const authContext =useContext(AuthContext)
 
     useEffect(()=>{
-        axios.get('/forum')
+        axios.get('/articles')
         .then(res=>{
             if(res.status!==401){
                 console.log(res.data)
-                setPosts(res.data)
+                setArticles(res.data)
             }
             else{
                 return{message:{msgBody: "UnAuthorized", msgError : true}}
@@ -26,12 +26,12 @@ const Forum = props => {
 
     const onSubmit=e=>{
         e.preventDefault()
-        axios.post('/forum',post)
+        axios.post('/admin/articles',article)
         .then(res =>{
             const {message}=res.data
             resetForm()
             if(!message.msgError){
-                    setPosts(res.data)
+                    setArticles(res.data)
                     setMessage(message)
                 }
             
@@ -46,50 +46,51 @@ const Forum = props => {
         })
     }
     const onChange = e =>{
-        setPost({...post, [e.target.name] : e.target.value})
-        console.log(post)
-      }
+        setArticle({...article, [e.target.name] : e.target.value})
+        console.log(article)
+    }
     const resetForm=()=>{
-        setPost({title:"", text: ""})
+        setArticle({title:"", content: ""})
     }
 
     return (
         <div>
             <Navbar/>
                 <header className="lessons">
-                    <h1>Forum</h1>
+                    <h1>Articole</h1>
                 </header>
-                <section id="lessons" className="container">
-            <form className="forumItem" onSubmit={onSubmit}>
-                <h3>Adauga o postare</h3>
+            <form className="adminForm" style={{paddingTop:"50px"}} onSubmit={onSubmit}>
                 <input 
                     className="form-control"
                     type="text" 
                     onChange={onChange}
-                    value={post.title} 
+                    value={article.title} 
                     name="title" 
-                    placeholder="Tema postarii" />
+                    placeholder="Titlul articolului" />
                 <br/>
-                <textarea rows="4"
+                <textarea
+                    rows="7"
                     className="form-control"
                     type="text" 
                     onChange={onChange}
-                    value={post.text} 
-                    name="text" 
-                    placeholder="Text" />
+                    value={article.content} 
+                    name="content" 
+                    placeholder="Continut" />
                 <button  className="btn btn-primary" type="submit">Adauga</button>
             </form>
             {message ? <Message message={message} /> : null}
-            <ul>
+            <ul className="items-ul items" style={{paddingTop:"40px"}}>
             {
-                posts.data && posts.data.map(post =>{
-                return <ForumItems id={post._id} creator={post._creator} post={post} data={posts.data} comments={post._comments} key={post._id}/>
-                }
-            )}
+                articles.data && articles.data.map(article =>{
+                return(
+                    <ArticleItems article={article} id={article._id} key={article._id}/>
+                )
+                
+                })
+            }
             </ul>
-            </section>
             <Footer />
         </div>
     )
 }
-export default Forum
+export default AdminArticles 

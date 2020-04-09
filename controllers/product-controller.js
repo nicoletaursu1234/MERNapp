@@ -1,41 +1,43 @@
-const model= require('../models');
+const model = require('../models')
 const express=require('express')
-const articleController=express.Router()
+const productController=express.Router()
 
-articleController.post= (req, res) => {
-    const {title, content} = req.body;
+productController.post=(req, res) => {
+    const { name, description, image, price } = req.body;
     console.log(req.body)
 
-    const article = new model.Article({
-        title,
-        content
-    });
+    const newProduct = new model.Product({
+        name,
+        description,
+        price,
+        image
+    })
 
-    article.save(err=>{
+    newProduct.save(err=>{
         if(err)
             res.status(500).json({
                 message: {
                     msgBody:"Error",
                     msgError: true
                 }})
-        else
+        else{
+            
             res.status(201).json({
                 message: {
-                    msgBody: "Articolul a fost creat cu succes",
+                    msgBody: "Produsul a fost creat cu succes",
                     msgError: false
                 }
             })
-        
+        }
     })
 }
-    
 
-articleController.get=(req, res) => {
-    model.Article.find({})
-        .then((articles) => {
+productController.get=(req, res) => {
+    model.Product.find({})
+        .then((products) => {
             return res.status(200).json({
                 succes: true,
-                data: articles
+                data: products
             });
         })
         .catch((err) => {
@@ -45,26 +47,22 @@ articleController.get=(req, res) => {
         })
 }
 
-articleController.delete= (req, res)=>{
+productController.delete=(req, res)=>{
     const clickedItemId=req.body.deleteButton
-    model.Article.findByIdAndDelete(clickedItemId, err=>{
+    model.Product.findByIdAndDelete(clickedItemId, err=>{
         if(err)
             res.status(500).json({message:{
-                msgBody: "Unable to delete the article",
+                msgBody: "Unable to delete the product",
                 msgError: true
             }})
         else{
             res.status(200).json({message:{
-                msgBody: "Successfully deleted the article",
+                msgBody: "Successfully deleted the product",
                 msgError: false
             }})
-            
-        //res.render('/admin/articles')
         }
-
-    })
-    
+})
 }
 
 
-module.exports=articleController
+module.exports=productController

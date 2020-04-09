@@ -11,14 +11,14 @@ class About extends Component{
                     <h1>Despre noi</h1>
                 </header>
                 <section>
-                <div className="container">
+                <div className="container" style={{paddingTop:"100px"}}>
                 <h2>Despre FitPass</h2>
                 <article>
                     Suntem o comunitate de persoane pasionate de sport care doresc să ofere posibilitatea
                     de a învăța lucruri noi despre un mod sănătos de viață.
                 </article>
                 <p>În caz de neclarități, nu ezitați să ne <a href="/contacts">contactați!</a></p>
-                <img id="about" src={png} alt="image"/>
+                <img id="about" src={png} alt="sport"/>
                 </div>
                 </section>
                 <Footer/>

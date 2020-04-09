@@ -1,0 +1,20 @@
+{
+    "presets": [
+      ["@babel/preset-env", {
+        "modules": false,
+        "targets": {
+          "chrome": 39
+        }
+      }],
+      ["@babel/preset-stage-1", {
+        "modules": false,
+        "decoratorsLegacy": true,
+        "pipelineProposal": "minimal"
+      }]
+    ],
+    "plugins": [
+      "transform-es2015-constants",
+      "@babel/plugin-transform-block-scoping",
+      "@babel/plugin-transform-runtime"
+    ]
+  }
